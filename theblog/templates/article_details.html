@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.title_tag}}{% endblock%}
+{% block content %}
+
+
+
+<h1>{{post.title}}</h1>
+<hr>
+<br>
+By: {{ post.author.first_name}} {{ post.author.last_name}}<br>
+{{ post.post_date}}
+<hr>
+{{ post.shayari }}
+<br><br>
+
+<form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    
+    {% if liked %}
+        <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-danger btn-sm">Unlike</button>
+    {% else %}
+        <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-primary btn-sm">Like</button>
+    {% endif %}
+     - {{total_likes}} Likes<br>
+</form><br>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+{% endblock %}

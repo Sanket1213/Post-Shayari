@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+{% for post in object_list %}
+{% if post.category != 'walgar' %}
+    <div class="card text-white bg-dark mb-3">
+        
+        <div class="card-body">
+        <p class="card-text"> <b>{{ post.shayari|linebreaks }}</b></p><hr style="background-color:white">
+
+        
+        <small>
+          By:- {{ post.author }} &nbsp;
+          <a href="{% url 'category' post.category %}">{{ post.category }}</a><br>
+          <small>{{ post.post_date }}</small><br>
+        </small>
+        
+        {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                        <small><a href="{% url 'update_post' post.pk %}">(Edit)</a></small>&nbsp;&nbsp;
+                        <small><a href="{% url 'delete_post' post.pk %}">(Delete)</a></small>
+                        <br>
+                    {% endif %}
+        {% endif %}
+        </div>
+        
+    </div>
+{% endif %}
+
+
+
+{% endfor %}
+
+
+  <footer class="page-footer font-small indigo" style="background-color: grey; padding-bottom: 10px;">
+
+    <div class="container">
+      <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+        <div class="col-md-2 mb-3">
+          <h5 class="text-uppercase font-weight-bold">
+            <b>About</b>
+          </h5>
+        </div>
+      </div>
+      <hr class="rgba-white-light" style="margin: 0 15%;">
+      <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+        <div class="col-md-8 col-12 mt-5">
+          <p style="line-height: 1.7rem">
+            We provide entertainment to the visitors of all ages. This website can be accessed from All mobile phones, All Tablets, laptops and other systems also. This webiste data is highly compressed to save user data. Webiste can be accessed on low speed internet connections easily.
+          </p>
+        </div>
+      </div>
+      <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+      <div class="row pb-3 text-center">
+        <div class="col-md-12">
+          <div class="mb-5 flex-center" >
+            <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100008887692659">
+              <i class="fab fa-facebook-f fa-lg white-text mr-4" style="color: black;"> </i>
+            </a>
+            <a class="tw-ic" href="https://twitter.com/SanketIngole17">
+              <i class="fab fa-twitter fa-lg white-text mr-4" style="color: black;"> </i>
+            </a>
+            <a class="li-ic" href="https://www.linkedin.com/in/sanket-ingole-897670177/">
+              <i class="fab fa-linkedin-in fa-lg white-text mr-4" style="color: black;"> </i>
+            </a>
+            <a class="ins-ic" href="https://www.instagram.com/splitsman_08/">
+              <i class="fab fa-instagram fa-lg white-text mr-4" style="color: black;"> </i>
+            </a>      
+          </div>
+          <i class="fas fa-home mr-3"></i>Wardha, Maharashtra, India&nbsp;&nbsp;|&nbsp;&nbsp;
+          <i class="fas fa-envelope mr-3"></i>ingolesanket5@gmail.com<br>
+          <small>&copy 2020 Shayar Baba by Splitsman</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>{{cats}}</h1>
+<br>
+{% if cat != 'walgar' %}
+{% if category_posts %}
+
+
+{% for post in category_posts %}
+
+    <div class="card text-white bg-dark mb-3">
+            
+        <div class="card-body">
+        <p class="card-text"> <b>{{ post.shayari|linebreaks }}</b></p><hr style="background-color:white">
+        <small>BY:- {{ post.author }}</small>
+        <br>
+        <small>{{ post.post_date }}</small><br>
+        {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                        <small><a href="{% url 'update_post' post.pk %}">(Edit)</a></small>&nbsp;&nbsp;
+                        <small><a href="{% url 'delete_post' post.pk %}">(Delete)</a></small>
+                        <br>
+                    {% endif %}
+        {% endif %}
+        </div>
+        
+    </div>
+
+{% endfor %}
+
+{% else %}
+<h3>Sorry No post of this Category</h3>
+{% endif %}
+
+{% endif %}
+
+{% endblock %}

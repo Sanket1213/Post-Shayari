@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories{% endblock%}
+{% block content %}
+
+<h1>Categories</h1><hr>
+    {% for item in cat_menu_list %}
+        {% if item == 'walgar' %}
+        
+        {% else %}
+            <a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a>
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock %}

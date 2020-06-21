@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>{{auth}}</h1>
+<br>
+{% if author_posts %}
+
+    <ul>
+    {% for post in author_posts %}
+        <li><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a> - {{ post.author }} - {{ post.post_date }}<br>
+                    
+            {% if user.is_authenticated %}
+                <small><a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
+                <small><a href="{% url 'delete_post' post.pk %}">(Delete)</a></small>
+                <br>
+            {% endif %}
+            {{ post.shayari }}
+
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>Sorry No post of this Category</h3>
+{% endif %}
+
+{% endblock %}
